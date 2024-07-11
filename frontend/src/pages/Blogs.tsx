@@ -14,7 +14,10 @@ export const Blogs = () => {
   <BlogSkeleton/>
 </div>
   
-  if (!blogs.length) return <div>No blogs found.</div>
+  if (!blogs.length) return <div>
+    <AppBar/>
+    <div>No blogs found.</div>
+  </div>
   
   return <div>
     <AppBar/>
