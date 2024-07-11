@@ -103,7 +103,17 @@ blog.get("/bulk", verifyjwt, async (c) => {
   }).$extends(withAccelerate())
 
   try {
-    const blogs = await prisma.blog.findMany({})
+    const blogs = await prisma.blog.findMany({
+      select: {
+        title: true,
+        content: true,
+        id: true,
+        author: {
+          select: {
+            name: true,
+          }
+      }
+    }})
 
     return c.json(blogs)
   } catch (error) {
@@ -124,7 +134,16 @@ blog.get("/:id", verifyjwt, async (c) => {
       where: {
         id: parseInt(id, 10),
       },
-    })
+      select: {
+        title: true,
+        content: true,
+        id: true,
+        author: {
+          select: {
+            name: true,
+          }
+      }
+    }})
 
     return c.json(blog)
 
